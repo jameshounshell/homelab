@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: metallb-system
+
+helmCharts:
+  - name: metallb
+    repo: https://metallb.github.io/metallb
+    releaseName: metallb
+    namespace: metallb-system
+    includeCRDs: true
+    valuesMerge: merge
+    valuesInline:
+      configInline:
+        address-pools:
+         - name: default
+           protocol: layer2
+           addresses:
+           - 192.168.1.225/32  # replace this with your server LAN ip
