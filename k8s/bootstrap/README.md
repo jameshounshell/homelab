@@ -7,7 +7,7 @@ if you have a different domain, grep for "jameshounshell" and replace it with yo
 
 - Cloudflare
   - ensure you have a DNS pointed at your home IP
-  - download an origin cert with the SANS *.<domain>.com and <domain>.com
+  - download an origin cert with the SANs `*.{domain}.com` and `{domain}.com`
 - Router
   - Log into your home router, go to firewall settings, and port forward http and https to the home server
 - Server
