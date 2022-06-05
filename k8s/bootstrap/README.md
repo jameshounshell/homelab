@@ -18,7 +18,7 @@ if you have a different domain, grep for "jameshounshell" and replace it with yo
 - Kubectl 
   - Install nginx, metallb, the test-app, and the certificate using `make bootstrap`
 - Verify
-  - Navigate to https://<domain>.com and you should see the text "It worked"
+  - Navigate to `https://{domain}.com` and you should see the text "It worked"
 
 
 Debugging
