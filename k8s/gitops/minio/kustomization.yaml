@@ -1,0 +1,33 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+patchesStrategicMerge:
+  - statefulset.patch.yaml
+resources:
+  - ingress.yaml
+helmCharts:
+  # https://github.com/minio/minio/tree/master/helm/minio
+  - name: minio
+    namespace: minio
+    repo: https://charts.min.io/
+    releaseName: minio
+    includeCRDs: true
+    valuesMerge: replace
+    valuesInline:
+      existingSecret: minio
+      persistence.enabled: false
+      replicas: 8
+      mode: standalone
+#      tls.enabled: true
+#      tls.certSecret: tls-ssl-minio
+
+#         env:
+#         - name: MINIO_ROOT_USER
+#           valueFrom:
+#             secretKeyRef:
+#               key: rootUser
+#               name: minio
+#         - name: MINIO_ROOT_PASSWORD
+#           valueFrom:
+#             secretKeyRef:
+#               key: rootPassword
+#               name: minio

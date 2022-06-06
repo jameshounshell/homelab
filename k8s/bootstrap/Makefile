@@ -4,14 +4,11 @@ bootstrap: prefight apply
 
 unbootstrap: delete
 
-demo_ns=demo
-
 prefight: create_cert
-	kubectl create ns $(demo_ns)
 
 create_cert:
-	kubectl delete -n $(demo_ns) secret origin-cert --ignore-not-found
-	kubectl create -n $(demo_ns) secret tls \
+	kubectl delete -n kube-system secret origin-cert --ignore-not-found
+	kubectl create -n kube-system secret tls \
 		origin-cert \
 		--key="${HOME}/secrets/key.pem" \
 		--cert="${HOME}/secrets/cert.pem"
@@ -41,4 +38,5 @@ curl:
 	@echo -------------------
 	curl -s https://jameshounshell.com | head -n 10
 
-
+argocd_secret:
+	kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo

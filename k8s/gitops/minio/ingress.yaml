@@ -1,0 +1,29 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minio-ingress
+  namespace: minio
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # https://kubernetes.github.io/ingress-nginx/examples/affinity/cookie/#caveats
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-name: "route"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+    # terminate tls, don't include other annotations
+spec:
+  rules:
+    - host: minio.jameshounshell.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: minio-console
+                port:
+                  name: http
+            pathType: Prefix
+            path: /
+  tls:
+    - hosts:
+        - jameshounshell.com

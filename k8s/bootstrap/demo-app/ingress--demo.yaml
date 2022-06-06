@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: '*.jameshounshell.com'
+  - host: 'www.jameshounshell.com'
     http:
       paths:
       - backend:
@@ -28,4 +28,3 @@ spec:
   tls:
   - hosts:
     - jameshounshell.com
-    secretName: origin-cert

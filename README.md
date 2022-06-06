@@ -7,3 +7,7 @@ kubernetes bootstrapping
 ------------------------
 Navigate to [k8s/bootstrap](k8s/bootstrap)
 
+
+TODO:
+----
+- add homepage using https://markdoc.io/

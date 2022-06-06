@@ -1,0 +1,26 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-staging
+  namespace: test
+spec:
+  acme:
+    email: jameshounshell@gmail.com.com
+    privateKeySecretRef:
+      name: letsencrypt-staging
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
+      - dns01:
+          cloudflare:
+            apiKeySecretRef:
+              key: api-key
+              name: cloudflare-api-key-secret
+            email: my-cloudflare-acc@example.com
+        selector:
+          dnsNames:
+            - jameshounshell.com
+            - '*.jameshounshell.com'
